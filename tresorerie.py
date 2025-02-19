@@ -70,6 +70,7 @@ def create_transaction():
         
         if st.button("Ajouter Transaction"):
             transaction_data = {
+                "id": f"{date.strftime('%Y%m%d')}-{hash(str(amount) + str(datetime.now()))}",
                 "date": date.isoformat(),
                 "type": transaction_type,
                 "client": client,
@@ -77,7 +78,7 @@ def create_transaction():
                 "commission_amount": commission_amount,
                 "treasury_impact": calculate_treasury_impact(transaction_type, amount, commission_amount),
                 "notes": notes
-            }
+                    }
             
             try:
                 db.add_transaction(transaction_data)
